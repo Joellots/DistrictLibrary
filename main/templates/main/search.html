@@ -1,0 +1,136 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+Book Database
+{% endblock %}
+
+{% block extrahead %}
+
+
+{% endblock %}
+
+{% block content %}
+<h2>Books</h2>
+<button id="my-trigger" class="btn btn-light">Click to search for Books</button>
+
+<!-- <form method="post" action="{% url 'search' %}" class="form-group">
+	{% csrf_token %}
+	<div class="input-group mb-2">
+		<div class="input-group-prepend">
+			<button type="submit" name='search_btn' class="btn btn-success" id="search_btn">Search</button>
+		</div>
+
+		{{formSearch.user_input}}
+		{{formSearch.search_by}}
+	</div>
+</form> -->
+<br>
+<br>
+<hr class="mt-0 mb-4">
+
+<p>Search for books in our Database</p>
+<div id="my-section" style="display: none;">
+<form method="get" class="form-group" >
+	{% csrf_token %}
+	<div class="input-group mb-2">
+		{{bookFilter.form}}
+		
+		<div class="input-group-prepend">
+			<button type="submit" name='filter_search_btn' class="btn btn-primary" id="filter_search_btn">Search</button>
+		</div>
+
+	</div>
+</form>
+</div>
+
+
+	<div id='table_section'>
+	<table class="table table-striped" id='book_table'>
+		<thead>
+			<tr>
+				<th scope="col">ID</th>	
+				<th scope="col">Book Title</th>	
+				<th scope="col">Author</th>	
+				<th scope="col">Genre</th>	
+				<th scope="col">Publishers</th>	
+				<th scope="col">Pages</th>	
+				<th scope="col">Rating</th>	
+				<th scope="col">Published Date</th>			
+			</tr>
+		</thead>
+			<tbody>
+					{% for book in books %}
+					<tr>
+						<th scope="row">{{book.id}}</th>
+						<td>{{book.title}}</td>
+						<td>
+							{% for author in book.author.all %}
+								{{author.Full_Name}}
+							{% endfor %}
+						</td>
+							
+						<td>
+							{% for genre in book.genre.all %}
+								{{genre.name}}
+							{% endfor %}
+						</td>
+
+						<td>
+							{% for publisher in book.publisher.all %}
+								{{publisher.name}}
+							{% endfor %}
+						</td>
+
+						<td>{{book.pages}}</td>
+						<td>{{book.rating}}</td>
+						<td>{{book.published_date}}</td>
+					</tr>
+					{% endfor %}
+			</tbody>
+
+			
+	</table>
+</div>
+<hr class="mt-0 mb-4">
+
+<button class="btn btn-dark" id='print-btn'>Print</button>
+
+
+	<script> 
+
+		var print_btn = document.getElementById('print-btn')    
+
+		print_btn.addEventListener('click', function Print(){
+			//display_none()
+  			window.print()
+  			//display_none()
+  		});
+
+
+  		// function display_none(){
+  		// 	var utility = document.getElementById('utility-section')
+
+  		// 	if(utility.style.display != "none"){
+  		// 		utility.style.display = 'none';
+  		// 	}else{
+  		// 		utility.style.display = "block";
+  		// 	}
+  			
+  		// }
+
+  		var section = document.getElementById("my-section");
+  		var trigger = document.getElementById("my-trigger");
+
+  		trigger.addEventListener("click", function() {
+   		 	if (section.style.display === "none") {
+      			section.style.display = "block";
+    		} else {
+      			section.style.display = "none";
+    		}
+  		});
+  
+	</script>
+
+
+{% endblock %}

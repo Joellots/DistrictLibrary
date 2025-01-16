@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+	
+<div class="col-md-6 offset-md-3">
+
+	{% if user.is_authenticated %}
+
+	<div class="" style="text-align: left;">
+		<!-- <h1>Hello <i><strong class="fw-bolder">{{request.GET.username}}</strong>,</i> welcome!</h1> -->
+		<h1>Hello <i><strong class="fw-bolder">{{user.username}}</strong>,</i> welcome!</h1>
+		{% if user.is_staff%}
+			<i> <a href="{% url 'search_admin'%}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Read a book</a></i>
+		{% else %}
+			<i> <a href="{% url 'search'%}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Read a book</a></i>
+		{% endif%}
+	</div>
+
+	{% elif user.is_authenticated == False %}
+
+	<h1>Login</h1>
+	<br>
+
+	<form method="POST" action="{% url 'login' %}">
+		{% csrf_token %}
+
+			<form>
+		  <div class="mb-3">
+		  
+		    <input type="text" class="form-control" name="username" placeholder="Username" required>
+		   
+		  </div>
+		  <div class="mb-3">
+		 
+		    <input type="password" class="form-control" name="password" placeholder="Password" required>
+		  </div>
+		 
+		  <button type="submit" class="btn btn-primary btn-block mb-4">Login</button>
+		</form>
+	</form>
+
+</div>
+
+		
+	
+</div>
+
+{% endif %}
+
+
+{% endblock %}

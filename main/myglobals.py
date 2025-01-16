@@ -1,0 +1,2 @@
+userInput = None
+srchBy = None

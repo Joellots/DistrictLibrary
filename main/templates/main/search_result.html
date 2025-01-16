@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+Search Result
+{% endblock %}
+
+{% block extrahead %}
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<h2>Search Result</h2>
+
+<!-- <p><span id="srchBy">{{srchBy}}: </span><span id="userInput">{{userInput}}</span></p> -->
+
+<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">ID</th>	
+				<th scope="col">Book Title</th>	
+				<th scope="col">Author</th>	
+				<th scope="col">Genre</th>	
+				<th scope="col">Publishers</th>	
+				<th scope="col">Pages</th>	
+				<th scope="col">Rating</th>	
+				<th scope="col">Published Date</th>			
+			</tr>
+		</thead>							
+		<tbody id="myTable">
+			
+		</tbody>
+
+</table>
+
+
+{% endblock %}
+
